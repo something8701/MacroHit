@@ -1,0 +1,20 @@
+import CoreData
+
+extension ScannedItem {
+    @NSManaged public var barcode: String
+    @NSManaged public var name: String
+    @NSManaged public var calories: Double
+}
+
+func saveScannedItem(barcode: String, name: String, calories: Double, context: NSManagedObjectContext) {
+    let newItem = ScannedItem(context: context)
+    newItem.barcode = barcode
+    newItem.name = name
+    newItem.calories = calories
+
+    do {
+        try context.save()
+    } catch {
+        print("Error saving item: \(error)")
+    }
+}
